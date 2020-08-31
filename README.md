@@ -19,4 +19,5 @@
 #### 4) To add a valid client - 
 
   * curl --location --request POST 'localhost:8080/admin/add-client?clientName=google'
+  * clientName should be unique
   * Returns a UUID which acts as a client id for subsequent interaction with service
