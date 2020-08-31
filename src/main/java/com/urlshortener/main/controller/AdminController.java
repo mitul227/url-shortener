@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/client-support")
+@RequestMapping("/admin")
 @Slf4j
-public class ClientSupportController {
+public class AdminController {
 
     @Autowired
     private ClientSupportService clientSupportService;

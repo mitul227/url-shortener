@@ -17,4 +17,4 @@ curl --location --request GET 'localhost:8080/get-hit-count?shortUrl=10000000'
 
 4) To add a valid client - 
 
-curl --location --request POST 'localhost:8080/client-support/add-client?clientName=google'
+curl --location --request POST 'localhost:8080/admin/add-client?clientName=google'
