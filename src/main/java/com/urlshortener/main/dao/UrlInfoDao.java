@@ -16,18 +16,18 @@ public class UrlInfoDao {
     private static final String KEY_SEPARATOR = "|";
 
     Map<Long, UrlInfo> urlInfoMap;
-    Map<String, UrlInfo> longUrlIndex;
+    Map<String, UrlInfo> clientLongUrlIndex;
 
     @PostConstruct
     public void init() {
         urlInfoMap = new HashMap<>();
-        longUrlIndex = new HashMap<>();
+        clientLongUrlIndex = new HashMap<>();
     }
 
     public String findShortUrl(String longUrl, String clientId) {
-        String key = getKeyForMap(longUrl, clientId);
-        if (longUrlIndex.containsKey(key)) {
-            return longUrlIndex.get(key).getShortUrl();
+        String key = getKeyForClientLongUrlIndex(longUrl, clientId);
+        if (clientLongUrlIndex.containsKey(key)) {
+            return clientLongUrlIndex.get(key).getShortUrl();
         }
         throw new RecordNotFoundException(ErrorCode.long_url_not_found, "Long url " + longUrl + " not found");
     }
@@ -52,11 +52,11 @@ public class UrlInfoDao {
     public UrlInfo addLongUrl(String longUrl, String clientId) {
         UrlInfo urlInfo = new UrlInfo(longUrl, clientId);
         urlInfoMap.put(urlInfo.getId(), urlInfo);
-        longUrlIndex.put(getKeyForMap(longUrl, clientId), urlInfo);
+        clientLongUrlIndex.put(getKeyForClientLongUrlIndex(longUrl, clientId), urlInfo);
         return urlInfo;
     }
 
-    private String getKeyForMap(String longUrl, String clientId) {
+    private String getKeyForClientLongUrlIndex(String longUrl, String clientId) {
         return longUrl + KEY_SEPARATOR + clientId;
     }
 
